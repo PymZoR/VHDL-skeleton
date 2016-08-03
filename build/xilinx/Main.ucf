@@ -1,0 +1,13 @@
+##### LOGI Bone Board Version R1#####
+##### Timing Constraints#####
+
+##### Grouping Constraints #####
+NET clk TNM_NET = clk50_grp;
+
+##### Clock Period Constraints #####
+TIMESPEC TS_PER_CLK50 = PERIOD "clk50_grp" 20.0 ns;
+
+# Pin LOC Constraints #
+NET clk    LOC = "P85";
+NET LED<0> LOC = "P140";
+NET LED<1> LOC = "P74";
