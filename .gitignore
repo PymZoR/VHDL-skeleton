@@ -2,9 +2,20 @@
 *.o
 *.cf
 *.out
+*.vcd
 
 ######## Xilinx ########
 # intermediate build files
+*.cfi
+*.map
+*.mcs
+*.mrp
+*.ngm
+*.prm
+*.psr
+*.scr
+*.srp
+*.lst
 *.bgn
 *.bit
 *.bld
