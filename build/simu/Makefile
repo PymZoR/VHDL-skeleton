@@ -11,19 +11,16 @@ SFLAGS = --stop-time=$(sim_stop_time) --assert-level=error
 SRC    = $(wildcard $(SDIR)/*.vhd)
 OBJ    = $(notdir $(SRC:.vhd=.o))
 
-# Build MainTest by default
-all : MainTest
+all : $(test_target)
 
-# Any test can be built
-% : $(OBJ) ./%.o
+$(test_target) : $(OBJ) $(test_target).o
 	$(CC) -e $(CFLAGS) -o $@.out $@
 	./$@.out $(SFLAGS) --vcd=$@.vcd
 
 %.o : $(SDIR)/%.vhd
 	$(CC) -a $(CFLAGS) $<
 
-# Trick : `./` is the testBench .o flag to trigger this rule
-./%.o : $(TDIR)/%.vhd
+$(test_target).o : $(TDIR)/$(test_target).vhd
 	$(CC) -a $(CFLAGS) $<
 
 $(TDIR)/%.o : $(TDIR)/%.vhd
@@ -31,7 +28,7 @@ $(TDIR)/%.o : $(TDIR)/%.vhd
 
 .SECONDARY : $(OBJ)
 
-.PHONY : clean makeDir
+.PHONY : clean
 
 clean :
 	rm -f *.o *.cf *.out
